@@ -171,5 +171,11 @@ public class VideoServiceImpl implements VideoService{
 		
 		return videoRepository.findAll();
 	}
+	@Override
+	public void deleteVideo(String videoId) {
+		// TODO Auto-generated method stub
+		videoRepository.deleteById(videoId);
+		
+	}
 
 }

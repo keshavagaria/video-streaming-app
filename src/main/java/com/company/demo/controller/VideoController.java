@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,10 +38,18 @@ import com.company.demo.service.VideoService;
 @CrossOrigin("*")
 public class VideoController {
 
+	
+	@Value("${files.video}")
+	String DIR;
+	
+	@Value("${files.video.hsl}")
+	String HSL_DIR;
+	
+	
 	@Autowired
 	private VideoService videoService;
 	
-	@PostMapping
+	@PostMapping("")
 	public ResponseEntity<?> create(
 				@RequestParam("file") MultipartFile file,
 				@RequestParam("title") String title,
@@ -167,9 +176,7 @@ public class VideoController {
 //		
 //	}
 	
-	@Value("${files.video.hsl}")
-	String HSL_DIR;
-	
+
 	@GetMapping("/{videoId}/master.m3u8")
 	public ResponseEntity<Resource> serveMasterFile(@PathVariable String  videoId){
 		
@@ -212,4 +219,13 @@ public class VideoController {
 		return videoService.getAllVideos();
 		
 	}
+	
+	
+	@DeleteMapping("/{videoId}")
+	public void deleteVideo(@PathVariable String videoId){
+		 videoService.deleteVideo(videoId);
+		
+	}
+	
+	
 }
