@@ -74,7 +74,7 @@ public class VideoServiceImpl implements VideoService{
 			video.setFilePath(path.toString());
 			
 			savedVideo = videoRepository.save(video);
-			//processVideo(savedVideo.getVideoId());
+			processVideo(savedVideo.getVideoId());
 			
 		} catch (IOException e) {}
 		return savedVideo;
@@ -107,10 +107,13 @@ public class VideoServiceImpl implements VideoService{
 	            Files.createDirectories(outputPath);
 	            
 	            System.out.println(videoPath+" "+outputPath);
+	            System.out.println("Working Directory = " + System.getProperty("user.dir")+"\\"+outputPath);
 
 	            String ffmpegCmd = String.format(
 	                    "ffmpeg -i \"%s\" -c:v libx264 -c:a aac -strict -2 -f hls -hls_time 10 -hls_list_size 0 -hls_segment_filename \"%s/segment_%%3d.ts\"  \"%s/master.m3u8\" ",
-	                    videoPath, outputPath, outputPath
+	                    System.getProperty("user.dir")+"\\"+videoPath, 
+	                    System.getProperty("user.dir")+"\\"+outputPath, 
+	                    System.getProperty("user.dir")+"\\"+outputPath
 	            );
 			
 //			StringBuilder ffmpegCmd = new StringBuilder();
@@ -133,7 +136,7 @@ public class VideoServiceImpl implements VideoService{
 //	            		"-c", ffmpegCmd);
 	           
 	            ProcessBuilder processBuilder = new ProcessBuilder();
-	            processBuilder.command("C:\\Windows\\System32\\cmd.exe","/c","c:\\Program Files\\ffmpeg\\bin\\ffmpeg.exe",ffmpegCmd);
+	            processBuilder.command("cmd.exe","/c",ffmpegCmd);
 	            
 	            processBuilder.inheritIO();
 	            Process process = processBuilder.start();
