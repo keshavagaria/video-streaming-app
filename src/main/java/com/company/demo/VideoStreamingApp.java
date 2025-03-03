@@ -6,16 +6,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class VideoStreamingApp	extends SpringBootServletInitializer
+public class VideoStreamingApp
 {
     public static void main( String[] args )
     {
     	SpringApplication.run(VideoStreamingApp.class, args);
     }
     
-    @Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		// TODO Auto-generated method stub
-		return builder.sources(VideoStreamingApp.class);
-	}
+  
 }
