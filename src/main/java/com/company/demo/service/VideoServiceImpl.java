@@ -110,8 +110,7 @@ public class VideoServiceImpl implements VideoService{
 	            System.out.println("Working Directory = " + System.getProperty("user.dir")+"\\"+outputPath); 
 	            
 	            String ffmpegCmd = String.format("ffmpeg -i \"%s\" -c:v h264 -flags +cgop -g 30 -hls_time 1 \"%s/out.m3u8\" ",
-	            		"app\\"+videoPath,
-	            		"app\\"+outputPath);
+	            		videoPath,outputPath);
 			
 //			StringBuilder ffmpegCmd = new StringBuilder();
 //			ffmpegCmd.append("ffmpeg -i")
@@ -135,7 +134,7 @@ public class VideoServiceImpl implements VideoService{
 	            ProcessBuilder processBuilder = new ProcessBuilder();
 	            
 	           // processBuilder.command("cmd.exe","/c",ffmpegCmd);
-	            processBuilder.command("/bin/bash","-c",ffmpegCmd);
+	            processBuilder.command("/bin/bash/app","-c",ffmpegCmd);
 	            
 	            processBuilder.inheritIO();
 	            Process process = processBuilder.start();
