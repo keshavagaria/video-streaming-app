@@ -111,7 +111,7 @@ public class VideoServiceImpl implements VideoService{
 
 	            String ffmpegCmd = String.format(
 	                    "ffmpeg -i \"%s\" -c:v libx264 -c:a aac -strict -2 -f hls -hls_time 10 -hls_list_size 0 -hls_segment_filename \"%s/segment_%%3d.ts\"  \"%s/master.m3u8\" ",
-	                    "/app"+videoPath,"/app"+outputPath,"/app"+outputPath
+	                    "/app/"+videoPath,"/app/"+outputPath,"/app/"+outputPath
 	                  
 	                    //local setting
 //	                    System.getProperty("user.dir")+"\\"+videoPath, 
