@@ -107,17 +107,11 @@ public class VideoServiceImpl implements VideoService{
 	            Files.createDirectories(outputPath);
 	            
 	            System.out.println(videoPath+" "+outputPath);
-	            System.out.println("Working Directory = " + System.getProperty("user.dir")+"\\"+outputPath);
-
-	            String ffmpegCmd = String.format(
-	                    "ffmpeg -i \"%s\" -c:v libx264 -c:a aac -strict -2 -f hls -hls_time 10 -hls_list_size 0 -hls_segment_filename \"%s/segment_%%3d.ts\"  \"%s/master.m3u8\" ",
-	                    "/app/"+videoPath,"/app/"+outputPath,"/app/"+outputPath
-	                  
-	                    //local setting
-//	                    System.getProperty("user.dir")+"\\"+videoPath, 
-//	                    System.getProperty("user.dir")+"\\"+outputPath, 
-//	                    System.getProperty("user.dir")+"\\"+outputPath
-	            );
+	            System.out.println("Working Directory = " + System.getProperty("user.dir")+"\\"+outputPath); 
+	            
+	            String ffmpegCmd = String.format("ffmpeg -i \"%s\" -c:v h264 -flags +cgop -g 30 -hls_time 1 \"%s/out.m3u8\" ",
+	            		"app\\"+videoPath,
+	            		"app\\"+outputPath);
 			
 //			StringBuilder ffmpegCmd = new StringBuilder();
 //			ffmpegCmd.append("ffmpeg -i")
@@ -138,10 +132,10 @@ public class VideoServiceImpl implements VideoService{
 //	            ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\visha\\	",
 //	            		"-c", ffmpegCmd);
 	           
-	            ProcessBuilder processBuilder = new ProcessBuilder("/bin/bash","-c",ffmpegCmd);
+	            ProcessBuilder processBuilder = new ProcessBuilder();
 	            
 	           // processBuilder.command("cmd.exe","/c",ffmpegCmd);
-	           // processBuilder.command("/bin/bash","-c",ffmpegCmd);
+	            processBuilder.command("/bin/bash","-c",ffmpegCmd);
 	            
 	            processBuilder.inheritIO();
 	            Process process = processBuilder.start();
