@@ -111,8 +111,9 @@ public class VideoServiceImpl implements VideoService{
 
 	            String ffmpegCmd = String.format(
 	                    "ffmpeg -i \"%s\" -c:v libx264 -c:a aac -strict -2 -f hls -hls_time 10 -hls_list_size 0 -hls_segment_filename \"%s/segment_%%3d.ts\"  \"%s/master.m3u8\" ",
-	                    videoPath,outputPath,outputPath
-	                    
+	                    "/app"+videoPath,"/app"+outputPath,"/app"+outputPath
+	                  
+	                    //local setting
 //	                    System.getProperty("user.dir")+"\\"+videoPath, 
 //	                    System.getProperty("user.dir")+"\\"+outputPath, 
 //	                    System.getProperty("user.dir")+"\\"+outputPath
@@ -140,7 +141,7 @@ public class VideoServiceImpl implements VideoService{
 	            ProcessBuilder processBuilder = new ProcessBuilder();
 	            
 	           // processBuilder.command("cmd.exe","/c",ffmpegCmd);
-	            processBuilder.command("/bin/bash/app","-c",ffmpegCmd);
+	            processBuilder.command("/app","-c",ffmpegCmd);
 	            
 	            processBuilder.inheritIO();
 	            Process process = processBuilder.start();
