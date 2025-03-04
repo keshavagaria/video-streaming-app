@@ -79,7 +79,7 @@ public class VideoController {
 	}
 	
 	@RequestMapping(value="/stream/{videoId}",method = RequestMethod.GET)
-	public ResponseEntity<String> stream(@PathVariable String videoId){
+	public ResponseEntity<Resource> stream(@PathVariable String videoId){
 		Video video = videoService.getVideo(videoId);
 		
 		
@@ -94,7 +94,7 @@ public class VideoController {
 		return ResponseEntity
 				.ok()
 				.contentType(MediaType.parseMediaType(contentType))
-				.body(filePath);
+				.body(resource);
 	}
 	
 	@RequestMapping(value = "/stream/range/{videoId}",method = RequestMethod.GET)
