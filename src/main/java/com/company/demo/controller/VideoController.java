@@ -79,13 +79,14 @@ public class VideoController {
 	}
 	
 	@RequestMapping(value="/stream/{videoId}",method = RequestMethod.GET)
-	public ResponseEntity<Resource> stream(@PathVariable String videoId){
+	public ResponseEntity<String> stream(@PathVariable String videoId){
 		Video video = videoService.getVideo(videoId);
 		
 		
 		String contentType = video.getContentType();
 		String filePath = video.getFilePath();
 		Resource resource=new FileSystemResource(filePath);
+		System.out.println(contentType+" "+filePath+" "+resource);
 		
 		if(contentType==null) {
 			contentType = "application/octet-stream";
@@ -93,7 +94,7 @@ public class VideoController {
 		return ResponseEntity
 				.ok()
 				.contentType(MediaType.parseMediaType(contentType))
-				.body(resource);
+				.body(filePath);
 	}
 	
 	@RequestMapping(value = "/stream/range/{videoId}",method = RequestMethod.GET)
