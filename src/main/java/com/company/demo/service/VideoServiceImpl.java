@@ -74,7 +74,7 @@ public class VideoServiceImpl implements VideoService{
 			video.setFilePath(path.toString());
 			
 			savedVideo = videoRepository.save(video);
-			//processVideo(savedVideo.getVideoId());
+			processVideo(savedVideo.getVideoId());
 			
 		} catch (IOException e) {}
 		return savedVideo;
@@ -110,8 +110,9 @@ public class VideoServiceImpl implements VideoService{
 	            System.out.println("Working Directory = " + System.getProperty("user.dir")+"\\"+outputPath); 
 	            
 	            String ffmpegCmd = String.format("ffmpeg -i \"%s\" -c:v h264 -flags +cgop -g 30 -hls_time 1 \"%s/out.m3u8\" ",
-	            		videoPath,outputPath);
-			
+	            		System.getProperty("user.dir")+"\\"+videoPath,
+	            		System.getProperty("user.dir")+"\\"+outputPath);
+	            //videoPath,outputPath);
 //			StringBuilder ffmpegCmd = new StringBuilder();
 //			ffmpegCmd.append("ffmpeg -i")
 //						.append(videoPath.toString())
@@ -133,7 +134,7 @@ public class VideoServiceImpl implements VideoService{
 	           
 	            ProcessBuilder processBuilder = new ProcessBuilder();
 	            
-	           // processBuilder.command("cmd.exe","/c",ffmpegCmd);
+	            //processBuilder.command("cmd.exe","/c",ffmpegCmd);
 	            processBuilder.command("/bin/bash/","-c",ffmpegCmd);
 	            
 	            processBuilder.inheritIO();
