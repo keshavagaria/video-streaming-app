@@ -134,7 +134,7 @@ public class VideoServiceImpl implements VideoService{
 	            ProcessBuilder processBuilder = new ProcessBuilder();
 	            
 	            //processBuilder.command("cmd.exe","/c",ffmpegCmd);
-	            processBuilder.command("/var/lib","-c",ffmpegCmd);
+	            processBuilder.command("/user/bin","-c","ffmpeg");
 	            
 	            processBuilder.inheritIO();
 	            Process process = processBuilder.start();
