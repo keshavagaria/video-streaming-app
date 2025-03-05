@@ -109,7 +109,7 @@ public class VideoServiceImpl implements VideoService{
 	            System.out.println(videoPath+" "+outputPath);
 	            System.out.println("Working Directory = " + System.getProperty("user.dir")+"\\"+outputPath); 
 	            
-	            String ffmpegCmd = String.format("chmod 755 ffmpeg -i \"%s\" -c:v h264 -flags +cgop -g 30 -hls_time 1 \"%s/out.m3u8\" ",
+	            String ffmpegCmd = String.format("ffmpeg -i \"%s\" -c:v h264 -flags +cgop -g 30 -hls_time 1 \"%s/out.m3u8\" ",
 	            		videoPath,outputPath);
 	            //videoPath,outputPath);
 //			StringBuilder ffmpegCmd = new StringBuilder();
